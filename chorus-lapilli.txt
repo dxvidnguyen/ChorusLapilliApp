@@ -1,0 +1,129 @@
+Chorus Lapilli Notes 
+
+Goals: 
+1) After your first three moves, instead of adding further pieces you must instead move one of your existing pieces to an empty square that is adjacent vertically, horizontally, or diagonally. Therefore, after your third move you always occupy three squares.
+2) If you have three pieces on the board and one of your pieces is in the center square, you must either win or vacate the center square in your next move.
+
+Bullet #1
+Concerns: 
+I) need to limit the amount the X and O that can be put down
+II) need to replace current state with null when removing
+III) need to move square either vertical, horizontal or diagonal 
+
+Change one if statement to multiple if else statements in handleClick 
+- addresses the cases of whether there is a winner, filled spot, or empty spot 
+
+In the class board
+- give values to X, O, and turns in order to keep track of the amount
+Note: this did not work
+
+Using global variables a, b and turns 
+- we are able to keep track of amount of stuff
+- a is for num of X
+- b is for num of O
+
+In handleClick
+- add value to turns, a, b 
+
+Must note that we can only remove after 6 turns 
+- add a stipulation to the part where we delete
+
+nextLocation function:
+- Creating a function that can will return the numbers that the next space can be 
+- move vertically must be + or - 3
+- move horizontal is either + or - 1
+
+Going to make an if statement to check like the amount of turns 
+- before 6 turns you cannot remove stuff, after you can
+
+Going to make a variable to count which one I move to next!
+- call it deletedSqaure 
+- going to pass it through the possible locations function
+
+Things to check about the next space
+A) need to check that its in our list
+B) need to check its an empty space 
+Possible combos 
+- empty space, in list
+- empty space, not in list
+- not empty, in list
+- not empty, not in list 
+We can check this through a series of if else statements
+
+checkDelete - will check if we are able to delete a square 
+- by default it will be true bc the first time we use it we will be able to delete a square
+- after deleting it will become false and then we will be unable to delete another square and this will force us to place a new block down 
+- will only become true when the next block is where we want it to be so we can delete again
+- will have it be R for default 
+- will change and once they delete the right variable and put back the right variable 
+
+What am I currently stuck on 
+Deleting the correct square
+Being able to move the piece
+And then replace and remove the next square
+
+Need to delete the correct squares to delete 
+Do that with an if statement with more qualifiers
+Final decision: check if xIsNext and squares[I] state aligns
+
+After doing this bullet 1 seems to work
+
+Bullet 2:
+So now we need to check the center piece
+Make Boolean variable to check for what is in the center piece
+
+when we start there will be nothing in the center 
+- so we set the variables to false and change when there is an indication 
+
+Added a change in the code handling the first 6 moves to account if there is an x or o in the center of the page  
+
+Need to take note of 4 cases
+1) xCenter = true 
+   oCenter = false
+2) xCenter = true. // note this case is not possible 
+   oCenter = true
+3) xCenter = false
+   oCenter = false
+4) xCenter = false 
+   oCenter = true
+- there are only 3 cases bc case 2 is impossible 
+
+Code got stuck with just these 4 cases (technically 3)
+- need to consider what to do when it the other turn
+- act normally
+- add two more cases 5a and 5b
+
+Need to also go into code and check if we put x and o in the center after first 6 turns
+Note to self: first six turns are turns 0 to 5 
+
+Need to also check for next move to see if we win 
+- can vacate center or another move to win
+
+Going to issue a warning that X or O is in the center
+- will note that you have to do something else
+
+Now that we have the condition of X or O needs to win
+- if both conditions are false we have a normal move
+- note: condition will only be true if we have x/o in center and did not vacate it
+- if one condition is true we need to check if the next move is true
+
+We will operate under the default move and replace if 
+Case A:
+1) neither x or o need to win
+2) o needs to win but it is x's turn
+3) x needs to win but it is o's turn
+ 
+Other situations 
+Case B:
+4) X needs to win and it is X's turn
+Case C:
+5) O needs to win and it is O's turn 
+
+Chganed up the global variables a and b
+Replaced them with x and y respectively 
+
+Have the variables 
+var xCheckWin = false; 
+var oCheckWin = false;
+- need this to signal that we need to check for 
+

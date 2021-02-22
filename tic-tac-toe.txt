@@ -1,0 +1,60 @@
+Tic-Tac-Toe Notes
+
+Downloaded the files with the bash command npx create-react-app my-app
+Deleted files in src directory and then creating new ones using command touch
+
+Editing the code locally(on my computer)
+--> opened the index.js file from my laptop (editing with sublime)
+Changes in code:
+- board now passes a prop value to square
+- class square now accepts the prop value
+- gave every square a number value
+- working in the square button and adding a function click
+	* the browser send a notif when the square is clicked
+  NOTE: can use either function() or () =>
+- added a constructor props 
+	* stores value of square currently (which is null by default)
+
+Replace this.props.value with this.state.value
+--> changes the number value to a state value(on/off)
+--> by default the value is null (off)
+
+Replace the onClick={...} event handler with onClick={() => this.setState({value: 'X'})}.
+--> when we click on a square it will change state 
+--> when on, x will appear 
+
+Put the className and onClick props on separate lines for better readability.
+--> just to see better
+
+Now we return each squares state value 
+onClick={() => this.handleClick(i)}
+--> will change the value with each click
+
+onClick function
+- built in and is set up with a click event listener
+- when button is clicked, onClick function is called
+- onClick passed into this.handleClick(i) 
+- noteL handleClick is currently undefined 
+
+handleClick(i)
+- will change the values of the squares
+
+Replace square class with a function
+- will be able to make changes w/o changing underlying data (immutability) 
+
+By changing the xIsNext into a Boolean function with X and O
+--> we are able to switch between X and O for the moves 
+These changes were applied in the handleClick and now we do it in render too to show who is next
+
+Function calculateWinner(squares)
+- takes in all the values of the squares 
+- has all wins possible and compares it to the current status
+Changes to render to pass the current state to the calculateWinner Function
+- also declares the winner
+
+Adding Time Travel
+- using slice() in order to create new copies of the squares
+- set up a history state
+- use render in order to determine the game status
+- set up constants to take in current values and the value before
+- use map to list out past moves
